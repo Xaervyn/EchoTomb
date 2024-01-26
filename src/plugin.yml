@@ -1,0 +1,5 @@
+name: EchoTombs
+version: 1.0
+author: Xaervyn
+main: net.xaervyn.EchoTombs.Main
+api-version: '1.20'
