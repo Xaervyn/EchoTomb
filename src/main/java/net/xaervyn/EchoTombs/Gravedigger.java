@@ -40,9 +40,6 @@ public class Gravedigger {
         // Create Tomb
         EchoTomb newTomb =  new EchoTomb(player.getUniqueId(), UUID.randomUUID(), location, tombInv);
 
-        // Set EXP for Tomb
-        newTomb.setExpLevels(player.getTotalExperience());
-
         // Set Expiration and Creation Time for Tomb
         newTomb.setTombCreationTime(LocalDateTime.now());
         newTomb.setTombExpirationTime(LocalDateTime.now().plusSeconds((long) duration * 60));

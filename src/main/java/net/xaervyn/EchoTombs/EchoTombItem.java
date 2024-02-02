@@ -30,7 +30,7 @@ public class EchoTombItem {
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         NamespacedKey keyMarking = new NamespacedKey(Main.getEchoTombsMain(), "EchoTomb");
         itemMeta.getPersistentDataContainer().set(keyMarking, PersistentDataType.BOOLEAN, true);
-        NamespacedKey keyPreservation = new NamespacedKey(Main.getEchoTombsMain(), "Persistence");
+        NamespacedKey keyPreservation = new NamespacedKey(Main.getEchoTombsMain(), "Preservation");
         itemMeta.getPersistentDataContainer().set(keyPreservation, PersistentDataType.INTEGER, 1);
         NamespacedKey keyDuration = new NamespacedKey(Main.getEchoTombsMain(), "Duration");
         itemMeta.getPersistentDataContainer().set(keyDuration, PersistentDataType.INTEGER, 7);
@@ -48,8 +48,8 @@ public class EchoTombItem {
         return false;
     }
 
-    public static int getPersistenceValue(ItemStack itemStack) {
-        NamespacedKey keyPreservation = new NamespacedKey(Main.getEchoTombsMain(), "Persistence");
+    public static int getPreservationValue(ItemStack itemStack) {
+        NamespacedKey keyPreservation = new NamespacedKey(Main.getEchoTombsMain(), "Preservation");
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null) {
             if (itemMeta.getPersistentDataContainer().has(keyPreservation, PersistentDataType.INTEGER)) {
