@@ -10,10 +10,12 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Gravedigger {
-    Set<EchoTomb> activeTombs;
+    private final Set<EchoTomb> activeTombs;
+    private final TombCleanup tombCln;
 
     protected Gravedigger() {
         activeTombs = new HashSet<>();
+        tombCln = new TombCleanup();
     }
 
     public EchoTomb createTomb(Player player, Location location, int duration) {
@@ -139,6 +141,8 @@ public class Gravedigger {
         return null;
     }
 
+    protected TombCleanup getTombCleanupRunnable() { return tombCln; }
+
     private class FileManager {
         private boolean saveEchoTomb(UUID tombId) {
             return false;
@@ -162,6 +166,20 @@ public class Gravedigger {
 
         private List<UUID> getEchoTombsForPlayer(UUID playerId) {
             return List.of();
+        }
+    }
+
+    protected class TombCleanup implements Runnable {
+
+        @Override
+        public void run() {
+            Iterator<EchoTomb> tombIterator = Gravedigger.this.activeTombs.iterator();
+            while (tombIterator.hasNext()) {
+                EchoTomb tomb = tombIterator.next();
+                if (tomb.getTombExpirationTime().isAfter(LocalDateTime.now())) {
+                    Gravedigger.this.destroyTomb(tomb);
+                }
+            }
         }
     }
 

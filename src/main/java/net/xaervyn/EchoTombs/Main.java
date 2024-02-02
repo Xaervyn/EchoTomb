@@ -23,11 +23,14 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new CraftTombListener(), this);
         getServer().getPluginManager().registerEvents(new EchoTombInventoryListener(), this);
+
+        // Start and Register Tomb Expiration Task
+        getServer().getScheduler().runTaskTimer(this, gravedigger.getTombCleanupRunnable(), 1200, 200);
     }
 
     @Override
     public void onDisable() {
-
+        getServer().getScheduler().cancelTasks(this);
 
         instance = null;
     }
