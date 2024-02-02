@@ -18,7 +18,7 @@ public class Gravedigger {
         tombCln = new TombCleanup();
     }
 
-    public EchoTomb createTomb(Player player, Location location, int duration) {
+    public EchoTomb createTomb(Player player, Location location) {
         Inventory pInv = player.getInventory();
 
         Bukkit.getLogger().info("Creating EchoTomb for " + player.getName() + " at x:" + location.getBlockX() +
@@ -39,10 +39,6 @@ public class Gravedigger {
 
         // Create Tomb
         EchoTomb newTomb =  new EchoTomb(player.getUniqueId(), UUID.randomUUID(), location, tombInv);
-
-        // Set Expiration and Creation Time for Tomb
-        newTomb.setTombCreationTime(LocalDateTime.now());
-        newTomb.setTombExpirationTime(LocalDateTime.now().plusSeconds((long) duration * 60));
 
         // Spawn Tomb into World
         Entity tombEntity = spawnTomb(newTomb);

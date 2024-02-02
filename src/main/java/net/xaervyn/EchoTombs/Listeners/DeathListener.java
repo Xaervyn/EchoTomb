@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.time.LocalDateTime;
+
 public class DeathListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -34,9 +36,13 @@ public class DeathListener implements Listener {
         }
 
         if (hasEchoTombItem) {
-            EchoTomb tomb = Main.getGravedigger().createTomb(player, location, durationLevel);
+            EchoTomb tomb = Main.getGravedigger().createTomb(player, location);
 
             tomb.setExpLevels(Math.min(player.getTotalExperience(), preservLevel*100));
+
+            // Set Expiration and Creation Time for Tomb
+            tomb.setTombCreationTime(LocalDateTime.now());
+            tomb.setTombExpirationTime(LocalDateTime.now().plusSeconds((long) durationLevel * 60));
 
             event.getDrops().clear();
             event.setDroppedExp(0);
