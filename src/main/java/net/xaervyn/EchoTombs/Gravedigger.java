@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Gravedigger {
@@ -15,7 +16,7 @@ public class Gravedigger {
         activeTombs = new HashSet<>();
     }
 
-    public EchoTomb createTomb(Player player, Location location) {
+    public EchoTomb createTomb(Player player, Location location, int duration) {
         Inventory pInv = player.getInventory();
 
         Bukkit.getLogger().info("Creating EchoTomb for " + player.getName() + " at x:" + location.getBlockX() +
@@ -39,6 +40,10 @@ public class Gravedigger {
 
         // Set EXP for Tomb
         newTomb.setExpLevels(player.getTotalExperience());
+
+        // Set Expiration and Creation Time for Tomb
+        newTomb.setTombCreationTime(LocalDateTime.now());
+        newTomb.setTombExpirationTime(LocalDateTime.now().plusSeconds((long) duration * 60));
 
         // Spawn Tomb into World
         Entity tombEntity = spawnTomb(newTomb);

@@ -33,7 +33,7 @@ public class EchoTombItem {
         NamespacedKey keyPreservation = new NamespacedKey(Main.getEchoTombsMain(), "Persistence");
         itemMeta.getPersistentDataContainer().set(keyPreservation, PersistentDataType.INTEGER, 1);
         NamespacedKey keyDuration = new NamespacedKey(Main.getEchoTombsMain(), "Duration");
-        itemMeta.getPersistentDataContainer().set(keyDuration, PersistentDataType.INTEGER, 1);
+        itemMeta.getPersistentDataContainer().set(keyDuration, PersistentDataType.INTEGER, 7);
         echoTombItem.setItemMeta(itemMeta);
         echoTombItem.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, 0);
         return echoTombItem;
@@ -57,6 +57,16 @@ public class EchoTombItem {
             }
         }
         return 0;
+    }
+
+    public static void setDurationValue(ItemStack itemStack, int value) {
+        NamespacedKey keyDuration = new NamespacedKey(Main.getEchoTombsMain(), "Duration");
+        if (itemStack != null) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            if (itemMeta != null) {
+                itemMeta.getPersistentDataContainer().set(keyDuration, PersistentDataType.INTEGER, value);
+            }
+        }
     }
 
     public static int getDurationValue(ItemStack itemStack) {

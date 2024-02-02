@@ -3,6 +3,7 @@ package net.xaervyn.EchoTombs;
 import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class EchoTomb {
@@ -10,6 +11,8 @@ public class EchoTomb {
     private final UUID tId;
     private final Location loc;
     private final Inventory tInv;
+    private LocalDateTime timeCreate;
+    private LocalDateTime timeDestroy;
     private int enchantXp;
     private UUID eId;
 
@@ -49,5 +52,14 @@ public class EchoTomb {
     public int getEnchantmentExperience() {
         return enchantXp;
     }
+
+    public void setTombExpirationTime(LocalDateTime expirationTimeTicks) { timeDestroy = expirationTimeTicks; }
+
+    public LocalDateTime getTombExpirationTime() { return timeDestroy; }
+
+    public void setTombCreationTime(LocalDateTime creationTimeTicks) { timeCreate = creationTimeTicks; }
+
+    public LocalDateTime getTombCreationTime() { return timeCreate; }
+
 
 }
